@@ -14,5 +14,5 @@ Another approach of the cloud resumer challenge.
 
 ### Step 4 : Deployment and Distribution
 
-### Step 5 : Test
+### Step 5 : Testing
 

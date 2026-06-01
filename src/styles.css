@@ -1,0 +1,157 @@
+/*Reset*/
+*{
+    box-sizing:border-box;
+    margin:0;
+}
+
+body{
+    font-family:'Source sans pro', sans-serif;
+    
+}
+
+/*Typo*/
+
+h1{
+    font-size:2.5rem; /* 2.2.25rem=36px/16px */
+    font-weight:lighter;
+    
+}
+
+h2{
+    font-size:2.25rem;
+    margin:0.167em 0;
+   
+}
+
+p{
+    font-size:1.125rem;
+}
+
+.fullname{
+    font-weight:bold;
+
+}
+
+.role, .status,.fullname {
+    text-transform:uppercase;
+}
+
+.role{
+    
+    font-weight:bold;
+    order:-1;
+   
+}
+
+.status{
+    font-weight: bold;
+    font-size:0.875rem;
+}
+
+.disclaimer{
+    font-size:0.75rem;
+}
+
+/*Flex Layout*/
+
+.headline, .content{
+    display:flex;
+    flex-direction: column;
+    padding-left:2em;
+    padding-right:2em
+}
+
+.headline{
+  background-color: lightblue;
+  min-height:25vh;
+  color:#ffffff;
+  justify-content: space-between;
+  align-items: center; /*center blocks*/
+  text-align: center; /*center blocks and content in the blocks*/
+  padding-bottom:1.5em;
+  
+}
+
+.content{
+    align-items:center;
+    padding-top:2.5em;
+}
+
+.avatar{
+    width:150px;
+    border-radius: 50%;
+}
+
+.content p, div{
+    max-width: 500px;
+}
+
+.intro, .notes{
+
+/*text-align:center;*/
+/*or the following rules to center items and text*/
+display:flex;
+flex-direction:column;
+align-items: center;
+
+}
+
+.notes{
+    
+    margin-top:10em;
+   
+}
+
+.content .notes{ /*hid aside*/
+    display: none;
+}
+
+/*Media Queries*/
+
+@media(min-width:600px){/*tablet*/
+    body{
+        display:flex;
+    }
+
+    h1{
+        font-size:4vw;
+    }
+
+    h2{
+        font-size:3vw;
+    }
+
+    .status{
+        font-size:2vw;
+    }
+
+    .notes{/*hid footer*/
+        display:none;
+    }
+    .content .notes{
+        display:block;
+        margin-top:auto; /*push and center at the bottom*/
+        padding-bottom:1.5em;
+    }
+
+    .headline, .content{
+        width:50%;
+    }
+
+    .headline{
+        min-height:100vh;
+    }
+    
+  
+     .resumer{/*center it*/
+
+        margin:auto;
+        
+    
+    }
+    
+}
+
+
+
+
