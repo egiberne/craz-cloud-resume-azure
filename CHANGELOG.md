@@ -1,5 +1,16 @@
 # Changelog
 
+
+## 0.5.0 - 2026-02-06
+### Added
+- Implement the frontend 
+    - Define javascript visit counter
+    - Define copyright
+### Change
+- Implement the frontend 
+    - Modify the html to load the javascript
+    - Modify the html to manipulate the DOM with javascript
+
 ## 0.4.0 - 2026-01-06
 ### Added
 - Implement the frontend 
@@ -8,8 +19,10 @@
     
 ### Change
 - Implement the frontend 
+    - Modify the html to load the styles
     - Remove the form
     - Update the content
+   
 
 ## 0.3.0 - 2026-31-05
 ### Added
