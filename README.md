@@ -6,10 +6,10 @@ Another approach of the cloud resumer challenge.
 
 |Name|Description|
 |----|-----------|
-|FlexBox model|Define the CSS design and layout|
-|LocalStorage|Store the count of visit in the browser|
-|Unicorn|Run the web server|
-|FastAPI|Provide the api endpoint|
+|FlexBox|Model defines the layout|
+|LocalStorage|Browser component stores the number of visit|
+|Uvicorn|Module runs the web server|
+|FastAPI|Module provides the api endpoint|
 
 
 ## Roadmap

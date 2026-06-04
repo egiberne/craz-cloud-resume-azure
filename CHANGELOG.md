@@ -1,5 +1,12 @@
 # Changelog
 
+
+## 0.6.1 - 2026-04-06
+## Fixed
+-  Correct
+    - Error Code : NameError: name 'FASTAPI' is not defined. Did you mean: 'FastAPI'?
+    - Refine the html content to update the  final goal to address
+
 ## 0.6.0 - 2026-04-06
 ## Added
 - Implement the back-end:
@@ -28,7 +35,6 @@
     - Remove the form
     - Update the content
    
-
 ## 0.3.0 - 2026-31-05
 ### Added
 - Implement the front-end 

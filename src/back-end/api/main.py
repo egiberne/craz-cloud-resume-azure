@@ -1,8 +1,8 @@
 # import fastapi library
-from fastapi import FASTAPI
+from fastapi import FastAPI
 
 # create a fastapi application
-app = FASTAPI()
+app = FastAPI()
 
 # create a endpoint called /health
 @app.get("/health")
