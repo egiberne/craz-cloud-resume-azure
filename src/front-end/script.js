@@ -2,20 +2,27 @@
 let fullYear = new Date().getFullYear()
 
 // Load or initialize visit counter
-let visitCount = parseInt(localStorage.getItem("visit_count") || "0")
+let visitCounter = parseInt(localStorage.getItem("visit_counter") || "0")
 
-// Increment visit count and store it
-visitCount++;
-localStorage.setItem("visit_count", visitCount);
+// Load or create a user ID 
+let userId = localStorage.getItem("user_id")
+if (!userId) { // it does not exist then create
+    userId = crypto.randomUUID()
+    localStorage.setItem("user_id", userId)
+}
+
+// Increment visit counter and store it
+visitCounter +=1
+localStorage.setItem("visit_counter", visitCounter)
 
 // Create the HTML content
 let html = `
     Copyright ${fullYear} 
-    <a href="www.github.com\egiberne\cloudresumerchallenge" target="_blank">
+    <a href="www.github.com\egiberne" target="_blank">
     egiberne@github 
     </a>
-    Your #${visitCount} visit
+    It is your #${visitCounter} visit
 `
-// Display the values 
+// Display the content
 document.getElementById('footer').innerHTML= html
 document.getElementById('aside').innerHTML= html

@@ -1,17 +1,29 @@
 # Changelog
 
+## 0.7.0 - 2026-05-06
+### Added
+- Implement the back-end 
+    -  Receive the GET request via endpoints API :
+        - GET request to say Hello ; endpoint /
+        - GET request to check the server status ; endpoint /health
+  
+### Changed
+-  Rename these javascript variables for understanding :
+    - visit_count to visit_counter
+    - visitCount to visitCounter 
 
 ## 0.6.1 - 2026-04-06
-## Fixed
--  Correct
-    - Error Code : NameError: name 'FASTAPI' is not defined. Did you mean: 'FastAPI'?
+### Fixed
+- Implement the back-end:
+    - Correct issue : NameError: name 'FASTAPI' is not defined. Did you mean: 'FastAPI'? ; Python library is Case Sensitive
+- Implement the front-end
     - Refine the html content to update the  final goal to address
 
 ## 0.6.0 - 2026-04-06
-## Added
+### Added
 - Implement the back-end:
     - Install the python environment
-    - Install the web server modules and the api modules
+    - Install the web server library (Uvicorn) and the api library (FastAPI)
 
 ## 0.5.0 - 2026-02-06
 ### Added
