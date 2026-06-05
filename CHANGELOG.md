@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.1 - 2026-05-06
+### Fixed
+- Correct issue :  
+    - client-side "detail": "Not Found" for endpoint http://127.0.0.1:8000/ 
+    - server-side : Correct issue :127.0.0.1:56657 - "GET /info HTTP/1.1" 404 Not Found
+    - Missing endpoint decorator "@app" instead of "app"
+
+
 ## 0.7.0 - 2026-05-06
 ### Added
 - Implement the back-end 
@@ -15,7 +23,8 @@
 ## 0.6.1 - 2026-04-06
 ### Fixed
 - Implement the back-end:
-    - Correct issue : NameError: name 'FASTAPI' is not defined. Did you mean: 'FastAPI'? ; Python library is Case Sensitive
+    - Correct issue : NameError: name 'FASTAPI' is not defined. Did you mean: 'FastAPI'? 
+    - Python library is Case Sensitive
 - Implement the front-end
     - Refine the html content to update the  final goal to address
 
