@@ -26,3 +26,13 @@ let html = `
 // Display the content
 document.getElementById('footer').innerHTML= html
 document.getElementById('aside').innerHTML= html
+
+fetch("http://127.0.0.1:8000/health")
+.then(response => response.json())
+.then(data=>console.log(data))
+
+fetch("http://127.0.0.1:8000/echo")
+.then(response => response.json())
+.then(data=>console.log(data))
+
+
