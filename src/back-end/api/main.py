@@ -1,3 +1,4 @@
+
 ## import fastapi library
 from fastapi import FastAPI, Request
 ## import the CORS| Cross Origin Resource Sharing module
@@ -9,9 +10,11 @@ app = FastAPI()
 
 
 origins =['*']
+methods =['*']
+headers =['*']
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins
+    allow_origins=origins,
 )
 
 ## GET requests
@@ -27,7 +30,7 @@ def root():
 @app.get("/health")
 ### define endpoint function 
 def health():
-### return jason
+### return 
     return'"status":"ok"'
 
 ## POST Requests
@@ -40,12 +43,13 @@ def echo():
 ## store number of visits per users based on user id
 visit_counter={}
 
+
+
 # POST Request : create a endpoint called, visit
 @app.post("/counter")
-def update_counter(request:Request):
-    data = request.text
-    user_id=data.get("userId")
-
+async def update_counter(request:Request):
+    data = await request.json()
+    user_id=  data.get("userId") 
     if not user_id:
         return "userId is required"
     
@@ -55,5 +59,8 @@ def update_counter(request:Request):
     else : 
         visit_counter[user_id] = 1
 
-    return visit_counter[user_id]
+    return { "visit_count": visit_counter[user_id] }
+
+
+
     

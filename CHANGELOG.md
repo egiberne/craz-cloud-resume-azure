@@ -1,6 +1,28 @@
 # Changelog
 
-## 0.8.1 - 2026-06-07
+## 0.8.2 - 2026-06-07
+### Fixed
+- Troubleshoot errors :
+    - Access to fetch at 'http://127.0.0.1:8000/counter' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+    script.js:38  POST http://127.0.0.1:8000/counter net::ERR_FAILED 500 (Internal Server Error)
+        - AttributeError: 'function' object has no attribute 'get'
+            - Must use an function .json() on `request` instead of attribute
+            ```python
+            request.json() 
+            ```
+        - AttributeError: 'coroutine' object has no attribute 'get'
+            - Endpoint function must be asynchronous for the POST to collect `data` from `request` :   
+            ```python 
+                    async def update_counter(request:Request):
+                    data = await request.json() 
+            ```
+            - Front-end must send json data :
+            ```javascript
+                 body:JSON.stringify({userId:userId})
+            ``` 
+
+
+## 0.8.1 - 2026-06-06
 ### Fixed
 - Troubleshoot issues :
     - client-side in the browser page: "detail":"Method Not Allowed" ; Browser submit GET request by default.
@@ -56,8 +78,9 @@
 ### Fixed
 - Correct issue :  
     - client-side "detail": "Not Found" for endpoint http://127.0.0.1:8000/ 
-    - server-side : Correct issue : "GET /info HTTP/1.1" 404 Not Found
-    - Missing endpoint decorator "@app" instead of "app"
+    - server-side : Correct issue : "GET /info HTTP/1.1" 404 Not Found because of :
+        - Missing endpoint decorator "@app" instead of "app" : Meaning no endpoint instance
+        - Or Mistyping the name of the endpoint
 
 
 ## 0.7.0 - 2026-06-05

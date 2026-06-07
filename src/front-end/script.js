@@ -28,14 +28,19 @@ document.getElementById('footer').innerHTML= html
 document.getElementById('aside').innerHTML= html
 
 fetch("http://127.0.0.1:8000/health")
-.then(response => response.json())
+.then(response => response.text())
 .then(data=>console.log(data))
 
 fetch("http://127.0.0.1:8000/echo",{method:"POST"})
+.then(response => response.text())
+.then(data => console.log(data))
+
+fetch("http://127.0.0.1:8000/counter",{
+    method:"POST",
+    body:JSON.stringify({userId:userId})
+})
 .then(response => response.json())
 .then(data => console.log(data))
 
-fetch("http://127.0.0.1:8000/counter",{method:"POST"})
-.then(response => response.json())
-.then(data => console.log(data))
+
 
