@@ -1,5 +1,12 @@
 # Changelog
-## 0.8.3- 2026-06-09
+
+## 0.9.0 - 2026-06-10
+### Added
+- Implement SQLite database 
+- Implement endpoint health for GET request
+- Implement endpoint visit for POST request; But there is issue with the counter
+
+## 0.8.3 - 2026-06-09
 ### Changed
 - Updated LICENSE with missing terms and content.
 - Updated README.md with a cleared roadmap and table

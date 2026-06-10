@@ -1,66 +1,31 @@
+# api/main.py
+from typing import List
+from fastapi import FastAPI, HTTPException, status, Depends
+from sqlalchemy.orm import Session
 
-## import fastapi library
-from fastapi import FastAPI, Request
-## import the CORS| Cross Origin Resource Sharing module
-from fastapi.middleware.cors import CORSMiddleware
-
-
-## create a fastapi instance
+from . import model, schema
+from .database import engine, SessionLocal, Base
+# Create database tables if they don't exist
+Base.metadata.create_all(bind=engine)
 app = FastAPI()
-
-
-origins =['*']
-methods =['*']
-headers =['*']
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-)
-
-## GET requests
-
-### create an endpoint at the root
-@app.get("/")
-### define endpoint function  
-def root():
-### return message text
-    return "Hello World, here is a Cloud Resumer Challenge by Emerick Giberne"
-
-## create an endpoint health
+# Dependency to get a database session
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+# Root endpoint for basic check
 @app.get("/health")
-### define endpoint function 
-def health():
-### return 
-    return'"status":"ok"'
-
-## POST Requests
-
-### create an endpoint /echo
-@app.post("/echo")
-def echo():
-    return '"received":"ok"'
-
-## store number of visits per users based on user id
-visit_counter={}
+def read_root():
+    return {"message": "Welcome !"}
 
 
 
-# POST Request : create a endpoint called, visit
-@app.post("/counter")
-async def update_counter(request:Request):
-    data = await request.json()
-    user_id=  data.get("userId") 
-    if not user_id:
-        return "userId is required"
-    
-    # Increment  visit count
-    if user_id in visit_counter :
-        visit_counter[user_id] += 1
-    else : 
-        visit_counter[user_id] = 1
-
-    return { "visit_count": visit_counter[user_id] }
-
-
-
-    
+@app.post("/visit/", response_model=schema.Visit, status_code=status.HTTP_201_CREATED)
+def set_visit(visit: schema.VisitCreate, db: Session = Depends(get_db)):
+    db_visit = model.Visit(userid=visit.userid, count=visit.count + 1 if visit.count else 1)
+    db.add(db_visit)
+    db.commit()
+    # db.refresh(db_visit)
+    return db_visit
