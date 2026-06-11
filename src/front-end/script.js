@@ -43,4 +43,13 @@ fetch("http://127.0.0.1:8000/counter",{
 .then(data => console.log(data))
 
 
+fetch("http://127.0.0.1:8000/counterv2",{
+    method:"POST",
+    body:JSON.stringify({userId:userId})
+})
+.then(response => response.json())
+.then(data => console.log(data))
+
+
+
 

@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.9.1 - 2026-06-11
+### Added
+Implement database.py module to create sqlite database and function for connection and initialization
+### Changed
+- Keep it simple with sqlite3 python module instead of using additional modules like sqlalchemy, pydantic
+### Fixed
+- Troubleshoot errors :
+`from database import init_db
+ModuleNotFoundError: No module named 'database'
+`
+    - Fix: as I create the module
+        ```Python
+        from .database ...
+        `
+        
 ## 0.9.0 - 2026-06-10
 ### Added
 - Implement SQLite database 
@@ -15,20 +30,21 @@
 ## 0.8.2 - 2026-06-07
 ### Fixed
 - Troubleshoot errors :
-    - Access to fetch at 'http://127.0.0.1:8000/counter' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+   - `Access to fetch at 'http://127.0.0.1:8000/counter' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
     script.js:38  POST http://127.0.0.1:8000/counter net::ERR_FAILED 500 (Internal Server Error)
-        - AttributeError: 'function' object has no attribute 'get'
-            - Must use an function .json() on `request` instead of attribute
+    `
+    - `AttributeError: 'function' object has no attribute 'get'`
+        - Must use an function .json() on `request` instead of attribute
             ```python
             request.json() 
             ```
-        - AttributeError: 'coroutine' object has no attribute 'get'
-            - Endpoint function must be asynchronous for the POST to collect `data` from `request` :   
+    - `AttributeError: 'coroutine' object has no attribute 'get'`
+        - Endpoint function must be asynchronous for the POST to collect `data` from `request` :   
             ```python 
                     async def update_counter(request:Request):
                     data = await request.json() 
             ```
-            - Front-end must send json data :
+        - Front-end must send json data :
             ```javascript
                  body:JSON.stringify({userId:userId})
             ``` 
@@ -37,9 +53,9 @@
 ## 0.8.1 - 2026-06-06
 ### Fixed
 - Troubleshoot issues :
-    - client-side in the browser page: "detail":"Method Not Allowed" ; Browser submit GET request by default.
+    - client-side in the browser page: `"detail":"Method Not Allowed"` ; Browser submit GET request by default.
     - client-side in the browser dev tool : no error :It works as Cross-origin enabled with CORS protocol (cors) is enabled by default
-    - server-side terminal console tool  : "GET /visit HTTP/1.1" 405 Method Not Allowed
+    - server-side terminal console tool  : `"GET /visit HTTP/1.1" 405 Method Not Allowed`
         - Correct with specify the method POST in the command:
         ```powershell
          Invoke-WebRequest -uri  http://127.0.0.1:8000/health -Method POST 
