@@ -35,7 +35,7 @@ fetch("http://127.0.0.1:8000/echo",{method:"POST"})
 .then(response => response.text())
 .then(data => console.log(data))
 
-fetch("http://127.0.0.1:8000/counter",{
+fetch("http://127.0.0.1:8000/v1/counter",{
     method:"POST",
     body:JSON.stringify({userId:userId})
 })
@@ -43,7 +43,7 @@ fetch("http://127.0.0.1:8000/counter",{
 .then(data => console.log(data))
 
 
-fetch("http://127.0.0.1:8000/counterv2",{
+fetch("http://127.0.0.1:8000/v2/counter",{
     method:"POST",
     body:JSON.stringify({userId:userId})
 })
@@ -51,5 +51,8 @@ fetch("http://127.0.0.1:8000/counterv2",{
 .then(data => console.log(data))
 
 
-
-
+fetch('http://127.0.0.1:8000/v2/counter?userId='+userId,{
+    method:"GET"
+})
+.then(response => response.json())
+.then(data => console.log(data))

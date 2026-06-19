@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.10.0 - 2026-06-18
+### Added
+POST Request
+### Changed
+Modify the path of the different endpoint versions 
+
+
 ## 0.9.1 - 2026-06-11
 ### Added
 Implement database.py module to create sqlite database and function for connection and initialization

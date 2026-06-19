@@ -22,7 +22,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 
-## create a fastapi instance
+## create a fastapi instance 
 app = FastAPI()
 
 
@@ -36,35 +36,50 @@ app.add_middleware(
 
 ## GET requests
 
-### create an endpoint at the root
+### create an endpoint at the root 
 @app.get("/")
 ### define endpoint function  
 def root():
 ### return message text
     return "Hello World, here is a Cloud Resumer Challenge by Emerick Giberne"
 
-## create an endpoint health
+## create an endpoint health to check the health of the application
 @app.get("/health")
 ### define endpoint function 
 def health():
 ### return 
     return'"status":"ok"'
 
+## create an endpoint /v2/counter to get the number of visits per user based on user id and get it from the SQLite database
+@app.get("/v2/counter")
+async def get_counter(userId: str):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT visitCount FROM visits WHERE userId = ?", (userId,))
+    row = cursor.fetchone()
+    conn.close()
+
+    if row:
+        return {"userId": userId, "visitCount": row["visitCount"]}
+    else:
+        return {"userId": userId, "visitCount": 0}
+    
+
 ## POST Requests
 
-### create an endpoint /echo
+### create an endpoint /echo to test the POST request
 @app.post("/echo")
 def echo():
     return '"received":"ok"'
 
-## store number of visits per users based on user id
+
+
+## POST Request : create a endpoint /v1/counter to count the number of visits per user based on user id
+### store number of visits per users based on user id
 visit_counter={}
-
-
-
-# POST Request : create a endpoint called, visit
-@app.post("/counter")
-async def update_counter(request:Request):
+@app.post("/v1/counter")
+async def set_counter(request:Request):
     data = await request.json()
     user_id=  data.get("userId")
     # check if userId is provided in the request
@@ -79,9 +94,9 @@ async def update_counter(request:Request):
 
     return { "userId": user_id, "visitCount": visit_counter[user_id] }
 
-
-@app.post("/counterv2")
-async def update_counter(request: Request):
+## create a endpoint /v2/counter to count the number of visits per user based on user id and store it in the SQLite database
+@app.post("/v2/counter")
+async def set_counter(request: Request):
     data = await request.json()
     user_id = data.get("userId")
 
