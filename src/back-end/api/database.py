@@ -15,7 +15,8 @@ def init_db():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS visits (
-            userId TEXT PRIMARY KEY,
+            dbID INTEGER PRIMARY KEY AUTOINCREMENT,
+            userId TEXT NOT NULL,
             visitCount INTEGER NOT NULL
         )
     """)

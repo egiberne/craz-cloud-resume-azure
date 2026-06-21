@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.11.0 - 2026-06-21
+### Changed
+- Modify the path of the different endpoint to visits as more conventional 
+- Modify the database schema to include a simple database identify for each row (unique visit)
+        
+### Fixed
+- Error message on the server side :
+` 
+"GET /v2/visits?userId=702fca00-a4bd-4b57-9ac2-44f30ab72e2b HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+ return {"dbID": row["dbID"], "userId": userId, "visitCount": row["visitCount"]}
+`
+    - Updated the SQL query to response with all the information for the query string with the userId :
+        ```sql
+        "SELECT visitCount, dbID FROM visits WHERE userId = ?", (userId,)
+        ```
+
+### Added 
+- GET request find the user info based on is user identifier (userId)
+- GET request find the user info based on is db identifier (dbID) but failing with error
+    - {"detail":[{"type":"missing","loc":["query","userId"],"msg":"Field required","input":null}]}
+
+
 ## 0.10.0 - 2026-06-18
 ### Added
 POST Request

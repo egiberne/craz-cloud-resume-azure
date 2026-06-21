@@ -50,20 +50,20 @@ def health():
 ### return 
     return'"status":"ok"'
 
-## create an endpoint /v2/counter to get the number of visits per user based on user id and get it from the SQLite database
-@app.get("/v2/counter")
+## create an endpoint /v2/visits to get the number of visits per user based on user id and get it from the SQLite database
+@app.get("/v2/visits")
 async def get_counter(userId: str):
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("SELECT visitCount FROM visits WHERE userId = ?", (userId,))
+    cursor.execute("SELECT visitCount, dbID FROM visits WHERE userId = ?", (userId,))
     row = cursor.fetchone()
     conn.close()
 
     if row:
-        return {"userId": userId, "visitCount": row["visitCount"]}
+        return {"dbID": row["dbID"], "userId": userId, "visitCount": row["visitCount"]}
     else:
-        return {"userId": userId, "visitCount": 0}
+        return {"dbID": None, "userId": userId, "visitCount": 0}
     
 
 ## POST Requests
@@ -75,10 +75,10 @@ def echo():
 
 
 
-## POST Request : create a endpoint /v1/counter to count the number of visits per user based on user id
+## POST Request : create a endpoint /v1/visits to count the number of visits per user based on user id
 ### store number of visits per users based on user id
 visit_counter={}
-@app.post("/v1/counter")
+@app.post("/v1/visits")
 async def set_counter(request:Request):
     data = await request.json()
     user_id=  data.get("userId")
@@ -94,8 +94,8 @@ async def set_counter(request:Request):
 
     return { "userId": user_id, "visitCount": visit_counter[user_id] }
 
-## create a endpoint /v2/counter to count the number of visits per user based on user id and store it in the SQLite database
-@app.post("/v2/counter")
+## create a endpoint /v2/visits to count the number of visits per user based on user id and store it in the SQLite database
+@app.post("/v2/visits")
 async def set_counter(request: Request):
     data = await request.json()
     user_id = data.get("userId")
@@ -119,15 +119,20 @@ async def set_counter(request: Request):
         )
     else:
         new_count = 1
+        db_id = None
         cursor.execute(
-            "INSERT INTO visits (userId, visitCount) VALUES (?, ?)",
-            (user_id, new_count)
+            "INSERT INTO visits (dbId, userId, visitCount) VALUES (?, ?, ?)",
+            (db_id, user_id, new_count)
         )
 
+
+    cursor.execute("SELECT dbId FROM visits WHERE userId = ?", (user_id,))
+    db_id = cursor.fetchone()["dbID"]
     conn.commit()
     conn.close()
 
-    return {"userId": user_id, "visitCount": new_count}
+
+    return {"dbID": db_id, "userId": user_id, "visitCount": new_count}
 
 
 
