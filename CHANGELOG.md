@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.1 - 2026-06-27
+### Fixed
+Correct the meta data in header
+
 ## 0.11.0 - 2026-06-21
 ### Changed
 - Modify the path of the different endpoint to visits as more conventional 
