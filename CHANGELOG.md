@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.12.0
+### Added
+Let take a step back as this is a local development, and I want to understand the foundation concepts.
+Implement an API with WSGI server instead of ASGI server. Without Framework.
+
 ## 0.11.1 - 2026-06-27
 ### Fixed
 Correct the meta data in header

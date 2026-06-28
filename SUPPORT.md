@@ -16,9 +16,14 @@ List of Tutorials
 [SQLite3](https://medium.com/@gopinath.v2507/python-fastapi-how-to-connect-fastapi-to-database-203be23c81e9)
 
 
+https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands?view=powershell-7.6
+
 
 https://learn.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal
 
 https://learn.microsoft.com/en-us/visualstudio/python/configure-web-apps-for-iis-windows
 
 https://dev.to/leapcell/wsgi-vs-asgi-the-crucial-decision-shaping-your-web-apps-future-in-2025-3pcd
+
+
+https://de.leapcell.io/blog/en/build-web-app-pure-python
