@@ -29,29 +29,24 @@ let html = `
 document.getElementById('footer').innerHTML= html
 document.getElementById('aside').innerHTML= html
 
-fetch("http://127.0.0.1:8000/health")
-.then(response => response.text())
-.then(data=>console.log(data))
 
-fetch("http://127.0.0.1:8000/echo",{method:"POST"})
-.then(response => response.text())
-.then(data => console.log(data))
 
-fetch("http://127.0.0.1:8000/v1/visits",{
-    method:"POST",
-    body:JSON.stringify({userId:userId})
+fetch("http://127.0.0.1:8000/wsgi/v1/visits",{
+    method:"GET"
 })
 .then(response => response.json())
 .then(data => console.log(data))
 
 
-fetch("http://127.0.0.1:8000/v2/visits",{
+fetch("http://127.0.0.1:8000/wsgi/v1/visits",{
     method:"POST",
     // send the userId in the body as JSON
     body:JSON.stringify({userId:userId})
 })
 .then(response => response.json())
 .then(data => console.log(data))
+
+
 
 
 fetch('http://127.0.0.1:8000/v2/visits?userId='+userId)

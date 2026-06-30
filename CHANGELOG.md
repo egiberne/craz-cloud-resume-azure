@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.12.1
+### Fixed
+Troubleshoot error message `Fatal error in launcher: Unable to create process using ...: The system cannot find the file specified.`
+    1. Reset or create a new the python environment :  `python -m venv env`
+    2. Enable the virtual environment : `env/script/activate`
+    3. Install the server dependency : `pip install <wsgi-server-package>`
+    4. Start the  WSGI server : `<wsgi-server-command>  <python-file>:<wsgi_app-function>`
+### Changed
+- Updated the instruction to set up the server environment 
+- Rename the a wsgi function
+- Rename the callback function of the wsgi function
+- Rename the endpoint url
+
+
 ## 0.12.0
 ### Added
 Let take a step back as this is a local development, and I want to understand the foundation concepts.
